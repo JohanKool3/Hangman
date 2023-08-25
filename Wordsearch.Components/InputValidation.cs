@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Wordsearch.Components
 {
-    internal class InputValidation
+    public class InputValidation
     {
+        private int maxDifficulty;
+        private int minDifficulty;
+
+        public bool ValidateDifficulty(int difficulty)
+            => (difficulty > minDifficulty && difficulty <= maxDifficulty);
     }
 }

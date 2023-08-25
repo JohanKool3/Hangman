@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34009.444
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wordsearch.Components", "Wordsearch.Components\Wordsearch.Components.csproj", "{0CE5657E-EF01-41DE-9A7D-BB1BF142B697}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wordsearch.Components", "Wordsearch.Components\Wordsearch.Components.csproj", "{0CE5657E-EF01-41DE-9A7D-BB1BF142B697}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wordsearch.ConsoleInterface", "Wordsearch.ConsoleInterface\Wordsearch.ConsoleInterface.csproj", "{64A15016-032C-4D70-AD89-70E422604E42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wordsearch.Tests", "Wordsearch.Tests\Wordsearch.Tests.csproj", "{262486F6-D60C-47C6-9D51-99D529EBD52C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{0CE5657E-EF01-41DE-9A7D-BB1BF142B697}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0CE5657E-EF01-41DE-9A7D-BB1BF142B697}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0CE5657E-EF01-41DE-9A7D-BB1BF142B697}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64A15016-032C-4D70-AD89-70E422604E42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64A15016-032C-4D70-AD89-70E422604E42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64A15016-032C-4D70-AD89-70E422604E42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64A15016-032C-4D70-AD89-70E422604E42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{262486F6-D60C-47C6-9D51-99D529EBD52C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{262486F6-D60C-47C6-9D51-99D529EBD52C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{262486F6-D60C-47C6-9D51-99D529EBD52C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{262486F6-D60C-47C6-9D51-99D529EBD52C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
