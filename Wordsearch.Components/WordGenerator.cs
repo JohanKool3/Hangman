@@ -14,12 +14,9 @@ namespace Wordsearch.Components
         private string word = "";
         public string Word { get { return word; }}
 
-
-        internal void SetupDatabaseConnection(string host, string username, string password, string database)
+        public WordGenerator(NpgsqlConnection connection)
         {
-            string connString = $"Host={host};Username={username};Password={password};Database={database}";
-            _connection = new NpgsqlConnection(connString);
-            _connection.Open();
+            _connection = connection;
         }
 
         internal void GenerateWord(int difficulty)

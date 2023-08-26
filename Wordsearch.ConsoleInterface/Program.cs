@@ -8,7 +8,7 @@ namespace Wordsearch
     public class Program
     {
         // Components
-        private static ScoringMechanism? backend;
+        private static Backend? backend;
 
         public static void Main(string[] args)
         {
