@@ -21,10 +21,7 @@ namespace Wordsearch.Components
 
         public ConfigSettings(int guessAmount)
         {
-            if(ValidateGuessAmount(guessAmount))
-            {
-                maxGuesses = guessAmount;
-            }
+            UpdateGuessAmount(guessAmount);
         }
         public void UpdateDifficulty(int difficulty)
         {
@@ -40,14 +37,18 @@ namespace Wordsearch.Components
 
         public void UpdateGuessAmount(int guessAmount)
         {
-            if(ValidateGuessAmount(guessAmount))
+            if (ValidateGuessAmount(guessAmount))
             {
                 maxGuesses = guessAmount;
             }
+            else
+            {
+                maxGuesses = 7;
+            }
         }
 
-        private bool ValidateGuessAmount(int guessAmount)
-            => (guessAmount < 0);
+        private static bool ValidateGuessAmount(int guessAmount)
+            => (guessAmount > 0);
 
         
 

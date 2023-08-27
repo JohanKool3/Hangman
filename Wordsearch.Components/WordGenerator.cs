@@ -9,7 +9,7 @@ namespace Wordsearch.Components
 {
     public class WordGenerator
     {
-        private NpgsqlConnection? _connection;
+        private NpgsqlConnection _connection = new NpgsqlConnection();
 
         private string word = "";
         public string Word { get { return word; }}
