@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34009.444
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hangman.Components", "Wordsearch.Components\Hangman.Components.csproj", "{0CE5657E-EF01-41DE-9A7D-BB1BF142B697}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hangman.Components", "Hangman.Components\Hangman.Components.csproj", "{0CE5657E-EF01-41DE-9A7D-BB1BF142B697}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Handman.ConsoleInterface", "Wordsearch.ConsoleInterface\Handman.ConsoleInterface.csproj", "{64A15016-032C-4D70-AD89-70E422604E42}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hangman.ConsoleInterface", "Hangman.ConsoleInterface\Hangman.ConsoleInterface.csproj", "{64A15016-032C-4D70-AD89-70E422604E42}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hangman.Components.Tests", "Wordsearch.Components.Tests\Hangman.Components.Tests.csproj", "{6D25A121-A2F4-415D-A297-62AC98122779}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hangman.Components.Tests", "Hangman.Components.Tests\Hangman.Components.Tests.csproj", "{6D25A121-A2F4-415D-A297-62AC98122779}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

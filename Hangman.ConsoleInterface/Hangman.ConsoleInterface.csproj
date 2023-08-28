@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Wordsearch.Components\Hangman.Components.csproj" />
+    <ProjectReference Include="..\Hangman.Components\Hangman.Components.csproj" />
   </ItemGroup>
 
 </Project>

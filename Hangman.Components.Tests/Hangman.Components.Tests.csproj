@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Wordsearch.Components\Hangman.Components.csproj" />
+    <ProjectReference Include="..\Hangman.Components\Hangman.Components.csproj" />
   </ItemGroup>
 
 </Project>
