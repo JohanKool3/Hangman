@@ -1,5 +1,4 @@
 ﻿using Npgsql;
-using System.Data.Common;
 
 namespace Wordsearch.Components
 {
