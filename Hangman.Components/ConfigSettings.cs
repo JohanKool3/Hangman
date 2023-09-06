@@ -20,7 +20,7 @@ namespace Wordsearch.Components
         }
         public void UpdateDifficulty(int difficulty)
         {
-            if(difficulty <= 4 && difficulty >= 0)
+            if(difficulty <= 4 && difficulty > 0)
             {
                 this.difficulty = difficulty;
             }
@@ -45,7 +45,7 @@ namespace Wordsearch.Components
         private static bool ValidateGuessAmount(int guessAmount)
             => (guessAmount > 0);
 
-        
+
 
     }
 }

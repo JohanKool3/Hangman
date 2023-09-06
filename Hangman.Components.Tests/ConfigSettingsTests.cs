@@ -9,7 +9,6 @@ namespace Wordsearch.Components.Tests
         public void ConfigSettings_Initialization_MatchExpected(int guessAmount, int expectedOutcome)
         {
             ConfigSettings settings = new(guessAmount);
-
             Assert.Equal(expectedOutcome, settings.MaxGuesses);
         }
 
@@ -29,34 +28,24 @@ namespace Wordsearch.Components.Tests
         public void ConfigSettings_DifficultyInitialization_Equals1()
         {
             ConfigSettings settings = new();
-            
             Assert.Equal(1, settings.Difficulty);
         }
 
-        [Theory]
-        [InlineData(2, 2)]
-        [InlineData(-1, 1)]
-        public void ConfigSettings_DifficultyUpdate_MatchExpected(int newAmount, int expectedOutcome)
+        [Fact]
+        public void ConfigSettings_DifficultyUpdate_Passes()
         {
             ConfigSettings settings = new();
 
-            try
-            {
-                settings.UpdateDifficulty(newAmount);
-                Assert.Equal(expectedOutcome, settings.Difficulty);
-            }
-            catch(ArgumentOutOfRangeException ex)
-            {
-                if (newAmount < 0)
-                {
-                    Assert.True(true);
-                }
-                else
-                {
-                    Assert.True(false, ex.Message);
-                }
-            }
-            
+            settings.UpdateDifficulty(1);
+            Assert.Equal(1, settings.Difficulty);
+        }
+
+        [Fact]
+        public void ConfigSettings_DifficultyUpdate_Fails()
+        {
+            ConfigSettings settings = new();
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => settings.UpdateDifficulty(0));
         }
 
         [Theory]

@@ -4,20 +4,18 @@ namespace Wordsearch.Components.Tests
 {
     public class DatabaseManagerTests
     {
-        [Theory]
-        [InlineData("localhost","postgres","mypassword","testDatabase", true)]
-        [InlineData("localhost","postgres","notmypassword","testDatabase", false)]
-        public void DatabaseManager_ConstructorWorks_MatchesExpected(string host, string username, string password, string database, bool passes)
+        [Fact]
+        public void DatabaseManager_ConstructorWorks_Suceeds()
         {
-            if (passes)
-            {
-                DatabaseManager dbManager = new(host, username, password, database);
-                Assert.NotNull(dbManager);
-            }
-            else
-            {
-                Assert.Throws<Exception>(() => new DatabaseManager(host, username, password, database));
-            }
+
+            DatabaseManager dbManager = new("localhost","postgres","mypassword","testDatabase");
+            Assert.NotNull(dbManager);
+
+        }
+        [Fact]
+        public void DatabaseManager_ConstructorWorks_Fails()
+        {
+            Assert.Throws<Exception>(() => new DatabaseManager("localhost", "postgres", "mypassword", "notAValidDatbase"));
         }
 
         [Fact]
@@ -44,8 +42,9 @@ namespace Wordsearch.Components.Tests
         public void DatabaseManager_ConfigureNewConnection_Suceeds()
         {
             DatabaseManager databaseManager = new("localhost", "postgres", "mypassword", "testDatabase");
+            databaseManager.ConfigureNewConnection("localhost", "postgres", "mypassword", "postgres");
 
-            Assert.Null(() => databaseManager.ConfigureNewConnection("localhost", "postgres", "mypassword", "postgres"));
+            Assert.NotNull(databaseManager);
 
         }
 
