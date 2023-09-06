@@ -22,9 +22,16 @@ namespace Wordsearch.Components
 
         private void SetupDatabaseConnection(string host, string username, string password, string database)
         {
-            string connString = $"Host={host};Username={username};Password={password};Database={database}";
-            _connection = new NpgsqlConnection(connString);
-            _connection.Open();
+            try
+            {
+                string connString = $"Host={host};Username={username};Password={password};Database={database}";
+                _connection = new NpgsqlConnection(connString);
+                _connection.Open();
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Invalid database credentials", ex);
+            }
         }
 
         internal void ConfigureNewConnection(string host, string username, string password, string database)
