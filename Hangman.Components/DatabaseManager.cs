@@ -10,7 +10,14 @@ namespace Wordsearch.Components
 
         internal DatabaseManager(string host, string username, string password, string database)
         {
-            SetupDatabaseConnection(host, username, password, database);
+            try
+            {
+                SetupDatabaseConnection(host, username, password, database);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Invalid database credentials", ex);
+            }
         }
 
         private void SetupDatabaseConnection(string host, string username, string password, string database)
