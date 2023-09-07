@@ -9,7 +9,7 @@ namespace Wordsearch.Components
         public int[] difficultyBounds { get { return new int[2] { minDifficulty, maxDifficulty }; } }
 
         public InputValidation() : this(1, 4) { }
-        public InputValidation(int maxDifficultyIn, int minDifficultyIn)
+        public InputValidation(int minDifficultyIn, int maxDifficultyIn)
         {
             if(maxDifficultyIn <= 0)
             {
@@ -20,7 +20,7 @@ namespace Wordsearch.Components
                 maxDifficulty = maxDifficultyIn;
             }
 
-            if(minDifficultyIn <= maxDifficulty)
+            if(minDifficultyIn >= maxDifficulty)
             {
                 throw new Exception("Maximum difficulty must be greater than the minimum difficulty");
             }
@@ -31,6 +31,6 @@ namespace Wordsearch.Components
         }
 
         public bool ValidateDifficulty(int difficulty)
-            => (difficulty > minDifficulty && difficulty <= maxDifficulty);
+            => (difficulty >= minDifficulty && difficulty <= maxDifficulty);
     }
 }

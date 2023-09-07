@@ -9,7 +9,7 @@ namespace Wordsearch.Components
         private int maxGuesses;
         public int MaxGuesses { get { return maxGuesses; } }
 
-        private char[] correctlyGuessedLetters;
+        private char[] correctlyGuessedLetters = new char[1]; // Default value to keep the compiler happy
         public char[] CorrectlyGuessedLetters { get { return correctlyGuessedLetters; } }
         private char[] wordLetters = new char[1];
         private string word = "";
@@ -59,9 +59,17 @@ namespace Wordsearch.Components
 
         private void HandleInput<T>(T input)
         {
+
             if(typeof(T) == typeof(string))
             {
-                string cleanInput = input.ToString();
+                string? cleanInput = input?.ToString();
+
+                // Guard Statement to prevent null value exceptions
+                if(cleanInput == null)
+                {
+                    throw new NullReferenceException($"String input is null and therefore cannot be processed, Value {cleanInput}");
+                }
+
 
                 if (IsCorrectGuessString(cleanInput))
                 {
@@ -76,7 +84,13 @@ namespace Wordsearch.Components
             }
             else if(typeof(T) == typeof(char))
             {
-                char cleanInput = input.ToString()[0];
+                string? stringInput = input?.ToString();
+
+                if(stringInput == null)
+                {
+                    throw new NullReferenceException($"Character input is null and therefore cannot be processed, Value {stringInput}");
+                }
+                char cleanInput = stringInput[0];
 
                 if (IsCorrectGuessChar(cleanInput))
                 {

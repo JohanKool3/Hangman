@@ -14,7 +14,7 @@ namespace Wordsearch.Components
         private static  InputValidation validator = new();
         private static readonly ConfigSettings settings = new();
         private static  WordGenerator? wordGenerator;
-        private static DatabaseManager databaseManager;
+        private static DatabaseManager? databaseManager;
         private static GameStateHandler stateHandler = new();
 
 
@@ -35,7 +35,7 @@ namespace Wordsearch.Components
             wordGenerator = new(databaseManager.Connection);
 
             // Difficulty importing from database
-            int[] difficulties = FetchDifficultyBounds();
+            int[] difficulties = FetchDifficultyBounds().GetAwaiter().GetResult();
             validator = new(difficulties[0], difficulties[1]);
 
             // Game Setup
@@ -49,21 +49,22 @@ namespace Wordsearch.Components
             stateHandler.Input(input);
         }
 
-        public static void SetNewWord()
+        public  void SetNewWord()
         {
             if (validator.ValidateDifficulty(settings.Difficulty))
             {
-                wordGenerator.GenerateWord(settings);
-                stateHandler.SetNewWord(settings, wordGenerator.Word);
+                wordGenerator?.GenerateWord(settings);
+                stateHandler.SetNewWord(settings, wordGenerator?.Word
+                    ?? throw new Exception("Word is null and therefore cannot have its value set to the current word"));
             }
             else
             {
                 throw new IndexOutOfRangeException(
-                    $"Difficulty is out of bounds.Must be between {validator.difficultyBounds[0]} and {validator.difficultyBounds[1]}");
+                    $"Difficulty is out of bounds.Must be between {validator.difficultyBounds[0]} and {validator.difficultyBounds[1]} Value: {settings.Difficulty}");
             }
         }
 
-        public static void SetNewDifficulty(int newDifficulty)
+        public  void SetNewDifficulty(int newDifficulty)
         {
             if (validator.ValidateDifficulty(newDifficulty))
             {
@@ -77,17 +78,20 @@ namespace Wordsearch.Components
             settings.UpdateGuessAmount(guesses);
         }
 
-        private static int[] FetchDifficultyBounds()
+        private async Task<int[]> FetchDifficultyBounds()
         {
             int[] output = new int[2];
 
+            if (databaseManager == null)
+                throw new NullReferenceException("DatabaseManager is null");
+
             // Reads the lowest difficulty setting
-            output[0] = databaseManager
+            output[0] = await databaseManager
                 .GetIntegerFromDatabase("SELECT difficulty_id " +
                                           "FROM difficulty " +
                                           "LIMIT 1;");
 
-            output[1] = databaseManager
+            output[1] = await databaseManager
                 .GetIntegerFromDatabase("SELECT difficulty_id " +
                                           "FROM difficulty " +
                                           "ORDER BY difficulty_id DESC " +

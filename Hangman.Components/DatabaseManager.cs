@@ -38,7 +38,7 @@ namespace Wordsearch.Components
         internal void ConfigureNewConnection(string host, string username, string password, string database)
             => SetupDatabaseConnection(host, username, password, database);
 
-        internal int GetIntegerFromDatabase(string queryString)
+        internal async Task<int> GetIntegerFromDatabase(string queryString)
         {
             int output;
             var cmd = new NpgsqlCommand(queryString, _connection);
@@ -50,7 +50,7 @@ namespace Wordsearch.Components
             return output;
         }
 
-        internal string GetStringFromDatabase(string queryString)
+        internal async Task<string> GetStringFromDatabase(string queryString)
         {
             string output;
             var cmd = new NpgsqlCommand(queryString, _connection);

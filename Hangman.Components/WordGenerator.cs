@@ -23,6 +23,7 @@ namespace Wordsearch.Components
             if(reader.Read())
             {
                 word = reader.GetString(0);
+                reader.Close();
             }
             else
             {
