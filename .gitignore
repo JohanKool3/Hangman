@@ -362,3 +362,5 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /Database Setup
+/Hangman.ConsoleInterface/Docker Builder/TestData
+/Hangman.ConsoleInterface/Docker Builder
