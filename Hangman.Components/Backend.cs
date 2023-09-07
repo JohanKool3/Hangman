@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace Wordsearch.Components
 {
-    
+
     public class Backend
     {
         private static  InputValidation validator = new();
         private static readonly ConfigSettings settings = new();
         private static  WordGenerator? wordGenerator;
-        private static DatabaseManager? databaseManager;
+        private static DatabaseManager databaseManager;
         private static GameStateHandler stateHandler = new();
 
 
@@ -28,8 +28,8 @@ namespace Wordsearch.Components
         /// <summary>
         /// Main backend object to use to interact with front end elements
         /// </summary>
-        public Backend(string host, string username, string password, string database) 
-        { 
+        public Backend(string host, string username, string password, string database)
+        {
             // Field setup
             databaseManager = new(host, username, password, database);
             wordGenerator = new(databaseManager.Connection);
@@ -39,7 +39,7 @@ namespace Wordsearch.Components
             validator = new(difficulties[0], difficulties[1]);
 
             // Game Setup
-            wordGenerator.GenerateWord(settings.Difficulty);
+            wordGenerator.GenerateWord(settings);
             stateHandler = new(settings, Word);
         }
 
@@ -53,7 +53,7 @@ namespace Wordsearch.Components
         {
             if (validator.ValidateDifficulty(settings.Difficulty))
             {
-                wordGenerator?.GenerateWord(settings.Difficulty);
+                wordGenerator.GenerateWord(settings);
                 stateHandler.SetNewWord(settings, wordGenerator.Word);
             }
             else
@@ -81,7 +81,7 @@ namespace Wordsearch.Components
         {
             int[] output = new int[2];
 
-            // Reads the lowest difficulty setting 
+            // Reads the lowest difficulty setting
             output[0] = databaseManager
                 .GetIntegerFromDatabase("SELECT difficulty_id " +
                                           "FROM difficulty " +

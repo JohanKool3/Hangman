@@ -4,7 +4,7 @@ namespace Wordsearch.Components
 {
     public class WordGenerator
     {
-        private NpgsqlConnection _connection = new NpgsqlConnection();
+        private NpgsqlConnection _connection = new();
 
         private string word = "";
         public string Word { get { return word; }}
@@ -14,12 +14,12 @@ namespace Wordsearch.Components
             _connection = connection;
         }
 
-        internal void GenerateWord(int difficulty)
+        internal void GenerateWord(ConfigSettings settings)
         {
+            int difficulty = settings.Difficulty;
             var cmd = new NpgsqlCommand($"SELECT content FROM word WHERE difficulty_id = {difficulty} ORDER BY RANDOM() LIMIT 1;",_connection);
 
             var reader = cmd.ExecuteReader();
-            
             if(reader.Read())
             {
                 word = reader.GetString(0);
