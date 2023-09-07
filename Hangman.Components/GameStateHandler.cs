@@ -9,7 +9,7 @@ namespace Wordsearch.Components
         private int maxGuesses;
         public int MaxGuesses { get { return maxGuesses; } }
 
-        private char[] correctlyGuessedLetters = new char[1];
+        private char[] correctlyGuessedLetters;
         public char[] CorrectlyGuessedLetters { get { return correctlyGuessedLetters; } }
         private char[] wordLetters = new char[1];
         private string word = "";
@@ -22,12 +22,15 @@ namespace Wordsearch.Components
         public List<string> IncorrectWords { get { return incorrectWords; } }
 
         private bool gameWon;
+
         private bool complete;
         public string GameStatus { get => complete ? GenerateEndGameStatus() : "Running"; }
 
         // Setup the word
 
         internal GameStateHandler():this(new ConfigSettings(), "default") { }
+
+        internal GameStateHandler(string wordIn) : this(new ConfigSettings(), wordIn) { }
 
         internal GameStateHandler(ConfigSettings settings, string wordIn)
         {
@@ -43,10 +46,8 @@ namespace Wordsearch.Components
             }
         }
 
-        public void SetNewWord(ConfigSettings settings, string wordIn)
-        {
-            ConfigureNewState(settings, wordIn);
-        }
+        public void SetNewWord(ConfigSettings settings, string wordIn) => ConfigureNewState(settings, wordIn);
+
 
         private void ConfigureNewState(ConfigSettings settings, string wordIn)
         {
@@ -96,7 +97,7 @@ namespace Wordsearch.Components
             MaxGuessChecks();
 
         }
-        
+
         private bool IsCorrectGuessString(string input)
             => (input == word);
         private bool IsCorrectGuessChar(char input)
