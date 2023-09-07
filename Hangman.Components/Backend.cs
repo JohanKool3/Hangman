@@ -21,9 +21,13 @@ namespace Wordsearch.Components
         public int MaxGuesses => settings.MaxGuesses;
         public int CurrentGuesses => stateHandler.CurrentGuesses;
         public char[] CorrectlyGuessedLetters => stateHandler.CorrectlyGuessedLetters;
+
+        public List<char> IncorrectLetters => stateHandler.IncorrectLetters;
+        public List<string> IncorrectWords => stateHandler.IncorrectWords;
         public string GameStatus => stateHandler.GameStatus;
 
         public string Word =>  (wordGenerator != null) ? wordGenerator.Word : "No Word Generated";
+        public int Difficulty => settings.Difficulty;
 
         /// <summary>
         /// Main backend object to use to interact with front end elements
@@ -44,7 +48,7 @@ namespace Wordsearch.Components
         }
 
 
-        public static void Input<T>(T input)
+        public void Input<T>(T input)
         {
             stateHandler.Input(input);
         }

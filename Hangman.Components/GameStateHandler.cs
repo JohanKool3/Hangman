@@ -94,7 +94,11 @@ namespace Wordsearch.Components
 
                 if (IsCorrectGuessChar(cleanInput))
                 {
-                    correctlyGuessedLetters[GetIndexOfLetter(cleanInput)] = cleanInput;
+
+                    foreach(int index in GetIndexOfLetter(cleanInput))
+                    {
+                        correctlyGuessedLetters[index] = cleanInput;
+                    }
                 }
                 else
                 {
@@ -132,8 +136,19 @@ namespace Wordsearch.Components
             wordLetters = word.Select(letter =>  letter).ToArray();
         }
 
-        private int GetIndexOfLetter(char letter)
-            => Array.IndexOf(wordLetters, letter);
+        private List<int> GetIndexOfLetter(char letter)
+        {
+            List<int> output = new();
+
+            for(int i= 0; i < wordLetters.Length; i++)
+            {
+                if (wordLetters[i] == letter)
+                {
+                    output.Add(i);
+                }
+            }
+            return output;
+        }
 
         private string GenerateEndGameStatus()
             => (gameWon) ? "Game Won" : "Game Lost";
