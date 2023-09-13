@@ -1,5 +1,5 @@
 ﻿
-namespace Wordsearch.Components.Tests
+namespace Hangman.Components.Tests
 {
     public class ConfigSettingsTests
     {

@@ -1,9 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using System.Linq.Expressions;
-using Wordsearch.Components;
+using Hangman.Components;
 
-namespace Wordsearch
+namespace Hangman
 {
     public class Program
     {

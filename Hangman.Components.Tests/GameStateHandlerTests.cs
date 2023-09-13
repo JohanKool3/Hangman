@@ -1,6 +1,6 @@
 ﻿
 
-namespace Wordsearch.Components.Tests
+namespace Hangman.Components.Tests
 {
     public class GameStateHandlerTests
     {
@@ -184,6 +184,18 @@ namespace Wordsearch.Components.Tests
             string lost = "Game Lost";
 
             Assert.Equal(lost, handler.GameStatus);
+        }
+
+        [Theory]
+        [InlineData("beans-bread", 5, '-')]
+        [InlineData("multiple lines",8, ' ')]
+        public void GameStateHandler_CorrectlyGuessedLetters_ShouldMatchExpectedValues(string word, int expectedIndex, char expectedChar)
+        {
+            GameStateHandler handler = new(word);
+
+            char[] chars = handler.CorrectlyGuessedLetters;
+
+            Assert.Equal(expectedChar, chars[expectedIndex]);
         }
     }
 }

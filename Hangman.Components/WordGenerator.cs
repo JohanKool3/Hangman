@@ -1,6 +1,6 @@
 ﻿using Npgsql;
 
-namespace Wordsearch.Components
+namespace Hangman.Components
 {
     public class WordGenerator
     {

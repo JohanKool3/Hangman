@@ -1,5 +1,5 @@
 ﻿
-namespace Wordsearch.Components
+namespace Hangman.Components
 {
     internal class ConfigSettings
     {

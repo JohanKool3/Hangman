@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Wordsearch.Components
+namespace Hangman.Components
 {
 
     public class Backend

@@ -1,5 +1,5 @@
 ﻿
-namespace Wordsearch.Components
+namespace Hangman.Components
 {
     internal class GameStateHandler
     {
@@ -134,6 +134,7 @@ namespace Wordsearch.Components
 
             correctlyGuessedLetters = new char[wordLength];
             wordLetters = word.Select(letter =>  letter).ToArray();
+            ConfigureNonLetterCharacters();
         }
 
         private List<int> GetIndexOfLetter(char letter)
@@ -148,6 +149,19 @@ namespace Wordsearch.Components
                 }
             }
             return output;
+        }
+
+        private void ConfigureNonLetterCharacters()
+        {
+            foreach(int index in GetIndexOfLetter(' '))
+            {
+                correctlyGuessedLetters[index] = ' ';
+            }
+
+            foreach(int index in GetIndexOfLetter('-'))
+            {
+                correctlyGuessedLetters[index] = '-';
+            }
         }
 
         private string GenerateEndGameStatus()

@@ -1,6 +1,6 @@
 ﻿using Npgsql;
 
-namespace Wordsearch.Components
+namespace Hangman.Components
 {
     internal class DatabaseManager
     {
@@ -16,7 +16,7 @@ namespace Wordsearch.Components
             }
             catch(Exception ex)
             {
-                throw new Exception("Invalid database credentials", ex);
+                throw new Exception("Invalid database Setup", ex);
             }
         }
 
@@ -31,7 +31,7 @@ namespace Wordsearch.Components
             }
             catch(Exception ex)
             {
-                throw new Exception("Invalid database credentials", ex);
+                throw new Exception("Invalid database Setup", ex);
             }
         }
 
