@@ -32,5 +32,39 @@ namespace Hangman.Components
 
         public bool ValidateDifficulty(int difficulty)
             => (difficulty >= minDifficulty && difficulty <= maxDifficulty);
+        /// <summary>
+        /// Returns True if the input is a valid word
+        /// </summary>
+        /// <param name="wordIn"></param>
+        /// <returns></returns>
+        internal bool ValidateInput(string wordIn)
+        {
+            List<char> characters = wordIn.ToLower().ToList();
+
+            foreach (char character in characters)
+            {
+                if(!char.IsLetter(character))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        internal bool ValidateInput(char letterIn)
+            => IsValidCharacter(letterIn);
+
+
+        private bool IsValidCharacter(char character)
+        {
+            switch(character)
+            {
+                case '-':
+                    return true;
+                case ' ':
+                    return true;
+                default:
+                    return char.IsLetter(character);
+            }
+        }
     }
 }

@@ -54,7 +54,7 @@ namespace Hangman.Components
             currentGuesses = 0;
             maxGuesses = settings.MaxGuesses;
             ConfigureWordFields(wordIn);
-            word = wordIn;
+            word = wordIn.ToLower();
         }
 
         private void HandleInput<T>(T input)
@@ -63,24 +63,7 @@ namespace Hangman.Components
             if(typeof(T) == typeof(string))
             {
                 string? cleanInput = input?.ToString();
-
-                // Guard Statement to prevent null value exceptions
-                if(cleanInput == null)
-                {
-                    throw new NullReferenceException($"String input is null and therefore cannot be processed, Value {cleanInput}");
-                }
-
-
-                if (IsCorrectGuessString(cleanInput))
-                {
-                    complete = true;
-                    gameWon = true;
-                }
-                else
-                {
-                    currentGuesses++;
-                    incorrectWords.Add(cleanInput);
-                }
+                HandleString(cleanInput);
             }
             else if(typeof(T) == typeof(char))
             {
@@ -91,20 +74,7 @@ namespace Hangman.Components
                     throw new NullReferenceException($"Character input is null and therefore cannot be processed, Value {stringInput}");
                 }
                 char cleanInput = stringInput[0];
-
-                if (IsCorrectGuessChar(cleanInput))
-                {
-
-                    foreach(int index in GetIndexOfLetter(cleanInput))
-                    {
-                        correctlyGuessedLetters[index] = cleanInput;
-                    }
-                }
-                else
-                {
-                    currentGuesses++;
-                    incorrectLetters.Add(cleanInput);
-                }
+                HandleChar(cleanInput);
             }
             else
             {
@@ -116,12 +86,66 @@ namespace Hangman.Components
 
         }
 
-        private bool IsCorrectGuessString(string input)
+        #region Input Handlers
+        private void HandleString(string? input)
+        {
+            InputValidation validator = new();
+            // Guard Statement to prevent null value exceptions
+            if (input == null)
+            {
+                throw new NullReferenceException($"String input is null and therefore cannot be processed, Value {input}");
+            }
+            // Prevent Illegal Inputs
+            if (!validator.ValidateInput(input))
+            {
+                throw new InvalidOperationException(input + " is not a valid input. Please configure front end validation to prevent these values.");
+            }
+
+
+            if (IsCorrectGuessString(input))
+            {
+                complete = true;
+                gameWon = true;
+            }
+            else
+            {
+                currentGuesses++;
+                incorrectWords.Add(input);
+            }
+
+        }
+
+        private void HandleChar(char input)
+        {
+            InputValidation validator = new();
+            if (!validator.ValidateInput(input))
+            {
+                throw new InvalidOperationException(input + " is not a valid input. Please configure front end validation to prevent these values.");
+            }
+
+            if (IsCorrectGuessChar(input))
+            {
+
+                foreach (int index in GetIndexOfLetter(input))
+                {
+                    correctlyGuessedLetters[index] = input;
+                }
+            }
+            else
+            {
+                currentGuesses++;
+                incorrectLetters.Add(input);
+            }
+        }
+
+        #endregion
+
+        internal bool IsCorrectGuessString(string input)
             => (input == word);
-        private bool IsCorrectGuessChar(char input)
+        internal bool IsCorrectGuessChar(char input)
             => wordLetters.Any(character => (character == input));
 
-        private void MaxGuessChecks()
+        internal void MaxGuessChecks()
         {
             if(currentGuesses >= maxGuesses)
             {

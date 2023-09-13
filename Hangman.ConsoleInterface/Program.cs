@@ -60,7 +60,6 @@ namespace Hangman
 
         private static void GameReadout(Backend backend)
         {
-            Console.Clear();
             Console.WriteLine($"Current Guesses: {backend.CurrentGuesses}/{backend.MaxGuesses}");
             Console.WriteLine($"Guessed Words: {ConvertStringListToString(backend.IncorrectWords)}");
             Console.WriteLine($"Guessed Letters: {ConvertCharListToString(backend.IncorrectLetters)}");
@@ -86,22 +85,40 @@ namespace Hangman
 
         private static void TakeInput(Backend backend)
         {
-            Console.WriteLine("Enter a word or letter:");
+            Console.Write("Enter a word or letter: ");
             string? input = Console.ReadLine();
+            Console.Clear();
 
-            if(input == null)
+            if (input == null || !ValidateInput(input)) // Invalid Value inputs
             {
                 Console.WriteLine("Must enter a valid value");
+
+
             }
-            else if(input.Length == 1)
+            else if (input.Length == 1)
             {
                 backend.Input(input[0]);
+
             }
             else
             {
                 backend.Input(input);
             }
 
+        }
+
+        private  static bool ValidateInput(string input)
+        {
+            List<char> characters = input.ToLower().ToList();
+
+            foreach (char character in characters)
+            {
+                if (!char.IsLetter(character))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         public static void Main()
