@@ -107,7 +107,7 @@ namespace Hangman
 
         }
 
-        private  static bool ValidateInput(string input)
+        private static bool ValidateInput(string input)
         {
             List<char> characters = input.ToLower().ToList();
 

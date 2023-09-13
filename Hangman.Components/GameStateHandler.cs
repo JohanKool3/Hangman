@@ -123,6 +123,12 @@ namespace Hangman.Components
                 throw new InvalidOperationException(input + " is not a valid input. Please configure front end validation to prevent these values.");
             }
 
+            // Check to see if the character has already been guessed
+            if (RepeatedLetter(input))
+            {
+                return;
+            }
+
             if (IsCorrectGuessChar(input))
             {
 
@@ -187,6 +193,8 @@ namespace Hangman.Components
                 correctlyGuessedLetters[index] = '-';
             }
         }
+
+        private bool RepeatedLetter(char letter) => correctlyGuessedLetters.Contains(letter) || incorrectLetters.Contains(letter);
 
         private string GenerateEndGameStatus()
             => (gameWon) ? "Game Won" : "Game Lost";

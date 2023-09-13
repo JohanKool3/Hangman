@@ -53,7 +53,6 @@ namespace Hangman.Components
         internal bool ValidateInput(char letterIn)
             => IsValidCharacter(letterIn);
 
-
         private bool IsValidCharacter(char character)
         {
             switch(character)

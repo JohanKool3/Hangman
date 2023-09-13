@@ -5,6 +5,7 @@ namespace Hangman.Components
     {
 
         private int difficulty = 1;
+        private static readonly int defaultGuessAmount = 10;
         public int Difficulty { get { return difficulty; } }
 
 
@@ -12,7 +13,7 @@ namespace Hangman.Components
         public int MaxGuesses { get => maxGuesses; }
 
 
-        public ConfigSettings() : this(7) { }
+        public ConfigSettings() : this(defaultGuessAmount) { }
 
         public ConfigSettings(int guessAmount)
         {
