@@ -20,11 +20,11 @@ namespace Hangman.Components
 
         public int MaxGuesses => settings.MaxGuesses;
         public int CurrentGuesses => stateHandler.CurrentGuesses;
-        public char[] CorrectlyGuessedLetters => stateHandler.CorrectlyGuessedLetters;
+        public char[] CorrectlyGuessedLetters {get{return stateHandler.CorrectlyGuessedLetters;}}
 
-        public List<char> IncorrectLetters => stateHandler.IncorrectLetters;
-        public List<string> IncorrectWords => stateHandler.IncorrectWords;
-        public string GameStatus => stateHandler.GameStatus;
+        public List<char> IncorrectLetters { get {return stateHandler.IncorrectLetters; } }
+        public List<string> IncorrectWords { get {return stateHandler.IncorrectWords; } }
+        public string GameStatus { get {return stateHandler.GameStatus; } } 
 
         public string Word =>  (wordGenerator != null) ? wordGenerator.Word : "No Word Generated";
         public int Difficulty => settings.Difficulty;
@@ -57,7 +57,7 @@ namespace Hangman.Components
             }
         }
 
-        public  void SetNewWord()
+        public void SetNewWord()
         {
             if (validator.ValidateDifficulty(settings.Difficulty))
             {

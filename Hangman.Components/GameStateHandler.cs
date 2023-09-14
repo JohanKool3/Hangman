@@ -14,7 +14,7 @@ namespace Hangman.Components
         private char[] wordLetters = new char[1];
         private string word = "";
 
-        private readonly List<char> incorrectLetters = new();
+        private List<char> incorrectLetters = new();
         public List<char> IncorrectLetters { get { return incorrectLetters; } }
 
 
@@ -52,6 +52,8 @@ namespace Hangman.Components
 
         private void ConfigureNewState(ConfigSettings settings, string wordIn)
         {
+            gameWon = false;
+            complete = false;
             currentGuesses = 0;
             maxGuesses = settings.MaxGuesses;
             ConfigureWordFields(wordIn);
@@ -189,6 +191,8 @@ namespace Hangman.Components
         private void ConfigureWordFields(string word)
         {
             int wordLength = word.Length;
+            incorrectLetters = new();
+            incorrectWords = new();
 
             correctlyGuessedLetters = new char[wordLength];
             wordLetters = word.Select(letter =>  letter).ToArray();

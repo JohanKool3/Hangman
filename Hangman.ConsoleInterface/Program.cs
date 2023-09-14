@@ -6,6 +6,8 @@ namespace Hangman
     public class Program
     {
 
+        private static Backend backend = SetupBackend();
+
         private static Backend SetupBackend()
         {
             // Fetch the information from the user secrets file
@@ -50,7 +52,7 @@ namespace Hangman
 
             if (output.Length > 2)
             {
-                return output.Substring(0, output.Length - 2);
+                return output[..^2];
             }
             else
             {
@@ -58,7 +60,7 @@ namespace Hangman
             }
         }
 
-        private static void GameReadout(Backend backend)
+        private static void GameReadout()
         {
             Console.WriteLine($"Current Guesses: {backend.CurrentGuesses}/{backend.MaxGuesses}");
             Console.WriteLine($"Guessed Words: {ConvertStringListToString(backend.IncorrectWords)}");
@@ -66,7 +68,7 @@ namespace Hangman
             Console.WriteLine($"Correctly Guessed Letters: {ConvertCharListToString(backend.CorrectlyGuessedLetters.ToList())}\n");
 
         }
-        private static void GameOverReadout(Backend backend)
+        private static void GameOverReadout()
         {
             Console.Clear();
             Console.WriteLine($"Current Guesses: {backend.CurrentGuesses}/{backend.MaxGuesses}");
@@ -83,7 +85,7 @@ namespace Hangman
             }
         }
 
-        private static void TakeInput(Backend backend)
+        private static void TakeInput()
         {
             Console.Write("Enter a word or letter: ");
             string? input = Console.ReadLine();
@@ -107,6 +109,34 @@ namespace Hangman
 
         }
 
+        private static bool ContinueGame()
+        {
+            bool validOutput = false;
+            while (!validOutput) 
+            { 
+                Console.WriteLine("Would you like to play again? Y/N");
+                string? output = Console.ReadLine();
+                char response =  (output == null) ?' ' :output.ToLower()[0];
+
+                if (response == 'y')
+                {
+                    backend.SetNewWord();
+                    return true;
+                }
+                else if(response == 'n')
+                {
+                    return false;
+                }
+                else
+                {
+                    Console.WriteLine("You must enter either Y or N");
+                }
+                Console.Clear();
+            }
+            return false;
+
+        }
+
         private static bool ValidateInput(string input)
         {
             List<char> characters = input.ToLower().ToList();
@@ -123,16 +153,21 @@ namespace Hangman
 
         public static void Main()
         {
-            Backend backend = SetupBackend();
+            bool gameRunning = true;
 
-
-            while(backend.GameStatus == "Running")
+            while (gameRunning)
             {
-                GameReadout(backend);
-                TakeInput(backend);
-            }
-            GameOverReadout(backend);
+                Console.Clear();
+                while (backend.GameStatus == "Running")
+                {
+                    GameReadout();
+                    TakeInput();
+                }
+                GameOverReadout();
 
+                gameRunning = ContinueGame();
+            }
+            Console.WriteLine("Thank you for playing");
         }
     }
 }
