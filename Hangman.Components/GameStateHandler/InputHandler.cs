@@ -3,7 +3,6 @@ namespace Hangman.Components
 {
     partial class GameStateHandler
     {
-        // TODO: Migrate functionality for InputHandler from InputValidation
 
         public string Input<T>(T input)
         {
