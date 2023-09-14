@@ -28,8 +28,8 @@ namespace Hangman
         private static bool ContinueGame()
         {
             bool validOutput = false;
-            while (!validOutput) 
-            { 
+            while (!validOutput)
+            {
                 Console.WriteLine("Would you like to play again? Y/N");
                 string? output = Console.ReadLine();
                 char response =  (output == null) ?' ' :output.ToLower()[0];
