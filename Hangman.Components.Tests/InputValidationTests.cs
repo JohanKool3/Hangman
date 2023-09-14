@@ -43,7 +43,7 @@ namespace Hangman.Components.Tests
         {
             var inputValidation = new Components.InputValidation();
 
-            var result = inputValidation.ValidateInput(input);
+            var result = Components.InputValidation.ValidateInput(input);
 
             Assert.False(result);
         }
@@ -57,7 +57,7 @@ namespace Hangman.Components.Tests
         {
             var inputValidation = new Components.InputValidation();
 
-            var result = inputValidation.ValidateInput(input);
+            var result = Components.InputValidation.ValidateInput(input);
 
             Assert.True(result);
         }

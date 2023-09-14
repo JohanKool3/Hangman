@@ -6,7 +6,7 @@ namespace Hangman.Components
         private readonly int maxDifficulty;
         private readonly int minDifficulty;
 
-        public int[] difficultyBounds { get { return new int[2] { minDifficulty, maxDifficulty }; } }
+        public int[] DifficultyBounds { get { return new int[2] { minDifficulty, maxDifficulty }; } }
 
         public InputValidation() : this(1, 4) { }
         public InputValidation(int minDifficultyIn, int maxDifficultyIn)
@@ -37,7 +37,7 @@ namespace Hangman.Components
         /// </summary>
         /// <param name="wordIn"></param>
         /// <returns></returns>
-        internal bool ValidateInput(string wordIn)
+        internal static bool ValidateInput(string wordIn)
         {
             List<char> characters = wordIn.ToLower().ToList();
 
@@ -53,17 +53,14 @@ namespace Hangman.Components
         internal bool ValidateInput(char letterIn)
             => IsValidCharacter(letterIn);
 
-        private bool IsValidCharacter(char character)
+        private static bool IsValidCharacter(char character)
         {
-            switch(character)
+            return character switch
             {
-                case '-':
-                    return true;
-                case ' ':
-                    return true;
-                default:
-                    return char.IsLetter(character);
-            }
+                '-' => true,
+                ' ' => true,
+                _ => char.IsLetter(character),
+            };
         }
     }
 }

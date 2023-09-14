@@ -50,7 +50,11 @@ namespace Hangman.Components
 
         public void Input<T>(T input)
         {
-            stateHandler.Input(input);
+            string output = stateHandler.Input(input);
+            if (output != "")
+            {
+                Console.WriteLine(output);
+            }
         }
 
         public  void SetNewWord()
@@ -64,7 +68,7 @@ namespace Hangman.Components
             else
             {
                 throw new IndexOutOfRangeException(
-                    $"Difficulty is out of bounds.Must be between {validator.difficultyBounds[0]} and {validator.difficultyBounds[1]} Value: {settings.Difficulty}");
+                    $"Difficulty is out of bounds.Must be between {validator.DifficultyBounds[0]} and {validator.DifficultyBounds[1]} Value: {settings.Difficulty}");
             }
         }
 

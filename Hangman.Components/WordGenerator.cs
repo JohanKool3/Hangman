@@ -22,7 +22,7 @@ namespace Hangman.Components
             var reader = cmd.ExecuteReader();
             if(reader.Read())
             {
-                word = reader.GetString(0);
+                word = reader.GetString(0).ToLower();
                 reader.Close();
             }
             else
