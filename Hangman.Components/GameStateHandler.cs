@@ -26,8 +26,6 @@ namespace Hangman.Components
         private bool complete;
         public string GameStatus { get => complete ? GenerateEndGameStatus() : "Running"; }
 
-        private static InputHandler? handler;
-
         // Setup the word
 
         internal GameStateHandler():this(new ConfigSettings(), "default") { }
@@ -37,7 +35,6 @@ namespace Hangman.Components
         internal GameStateHandler(ConfigSettings settings, string wordIn)
         {
             ConfigureNewState(settings, wordIn);
-            handler = new(this);
         }
 
 
@@ -45,7 +42,7 @@ namespace Hangman.Components
         {
             if (!complete)
             {
-                return handler?.HandleInput(input) ?? throw new NullReferenceException("Handler must not be null");
+                return HandleInput(input);
             }
             return "";
         }
@@ -63,39 +60,121 @@ namespace Hangman.Components
             word = wordIn.ToLower();
         }
 
-        internal void SetWin()
+        private string HandleInput<T>(T input)
         {
-            complete = true;
-            gameWon = true;
-        }
-
-        internal void IncorrectWordGuess(string word)
-        {
-            currentGuesses++;
-            incorrectWords.Add(word);
-        }
-
-        internal void CorrectGuessChar(char input)
-        {
-            foreach (int index in GetIndexOfLetter(input))
+            string output = "";
+            if(typeof(T) == typeof(string))
             {
-                correctlyGuessedLetters[index] = input;
+                string? cleanInput = input?.ToString();
+                try
+                {
+                    HandleString(cleanInput);
+                }
+                catch (InvalidOperationException ex)
+                {
+                    output = "Word has already been guessed";
+                }
+            }
+            else if(typeof(T) == typeof(char))
+            {
+                string? stringInput = input?.ToString();
+
+                if(stringInput == null)
+                {
+                    throw new NullReferenceException($"Character input is null and therefore cannot be processed, Value {stringInput}");
+                }
+                char cleanInput = stringInput[0];
+
+                try
+                {
+                    HandleChar(cleanInput);
+                }
+                catch
+                {
+                    output = "Letter has already been guessed";
+                }
+            }
+            else
+            {
+                throw new InvalidDataException("Invalid type for input");
             }
 
-            // Check to see if there are any empty letters, If not then the game is won
-            if (!correctlyGuessedLetters.Any(letter => letter == '\0'))
+            // Check to see if the game is over
+            MaxGuessChecks();
+            return output;
+
+        }
+
+        #region Input Handlers
+        private void HandleString(string? input)
+        {
+            // Guard Statement to prevent null value exceptions
+            if (input == null)
+            {
+                throw new NullReferenceException($"String input is null and therefore cannot be processed, Value {input}");
+            }
+
+            if(RepeatedWord(input))
+            {
+                throw new InvalidOperationException(input + " has already been guessed. Please configure front end validation to prevent these values.");
+            }
+
+            if (!InputValidation.ValidateInput(input))
+            {
+                throw new InvalidOperationException(input + " is not a valid input. Please configure front end validation to prevent these values.");
+            }
+
+            // Handles a win by correct guess
+            if (IsCorrectGuessString(input))
             {
                 complete = true;
                 gameWon = true;
             }
+            else
+            {
+                currentGuesses++;
+                incorrectWords.Add(input);
+            }
+
         }
 
-        internal void IncorrectGuessChar(char input)
+        private void HandleChar(char input)
         {
-            currentGuesses++;
-            incorrectLetters.Add(input);
+            InputValidation validator = new();
+            if (!validator.ValidateInput(input))
+            {
+                throw new InvalidOperationException(input + " is not a valid input. Please configure front end validation to prevent these values.");
+            }
+
+            // Check to see if the character has already been guessed
+            if (RepeatedLetter(input))
+            {
+                throw new InvalidOperationException(input + " has already been guessed. Please configure front end validation to prevent these values.");
+            }
+
+            if (IsCorrectGuessChar(input))
+            {
+
+                foreach (int index in GetIndexOfLetter(input))
+                {
+                    correctlyGuessedLetters[index] = input;
+                }
+
+                // Check to see if there are any empty letters, If not then the game is won
+                if (!correctlyGuessedLetters.Any(letter => letter == '\0'))
+                {
+                    complete = true;
+                    gameWon = true;
+                }
+            }
+            else
+            {
+                currentGuesses++;
+                incorrectLetters.Add(input);
+            }
         }
-        
+
+        #endregion
 
         internal bool IsCorrectGuessString(string input)
             => (input == word);
@@ -146,6 +225,10 @@ namespace Hangman.Components
                 correctlyGuessedLetters[index] = '-';
             }
         }
+
+        private bool RepeatedLetter(char letter) => correctlyGuessedLetters.Contains(letter) || incorrectLetters.Contains(letter);
+
+        private bool RepeatedWord(string word) => incorrectWords.Contains(word);
 
         private string GenerateEndGameStatus()
             => (gameWon) ? "Game Won" : "Game Lost";
