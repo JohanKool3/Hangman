@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Hangman.Components;
+using Hangman.ConsoleInterface;
 
 namespace Hangman
 {
@@ -22,91 +23,6 @@ namespace Hangman
             string database = config["Database"] ?? "database";
 
             return new Backend(host, username, password, database);
-        }
-
-        private static string ConvertCharListToString(List<char> charList)
-        {
-            string output = "";
-            foreach(char character in charList)
-            {
-                if(character != '\0')
-                {
-                    output += $"{character} ";
-                }
-                else
-                {
-                    output += "_ ";
-                }
-            }
-
-            return output;
-        }
-
-        private static string ConvertStringListToString(List<string> strList)
-        {
-            string output = "";
-            foreach (string str in strList)
-            {
-                output += $"{str}, ";
-            }
-
-            if (output.Length > 2)
-            {
-                return output[..^2];
-            }
-            else
-            {
-                return output;
-            }
-        }
-
-        private static void GameReadout()
-        {
-            Console.WriteLine($"Current Guesses: {backend.CurrentGuesses}/{backend.MaxGuesses}");
-            Console.WriteLine($"Guessed Words: {ConvertStringListToString(backend.IncorrectWords)}");
-            Console.WriteLine($"Guessed Letters: {ConvertCharListToString(backend.IncorrectLetters)}");
-            Console.WriteLine($"Correctly Guessed Letters: {ConvertCharListToString(backend.CorrectlyGuessedLetters.ToList())}\n");
-
-        }
-        private static void GameOverReadout()
-        {
-            Console.Clear();
-            Console.WriteLine($"Current Guesses: {backend.CurrentGuesses}/{backend.MaxGuesses}");
-            Console.WriteLine($"Correctly Guessed Letters: {ConvertCharListToString(backend.CorrectlyGuessedLetters.ToList())}\n");
-
-            if(backend.GameStatus == "Game Won")
-            {
-                Console.WriteLine("You Won!");
-            }
-            else
-            {
-                Console.WriteLine("You Lost!");
-                Console.WriteLine($"Correct word was {backend.Word}");
-            }
-        }
-
-        private static void TakeInput()
-        {
-            Console.Write("Enter a word or letter: ");
-            string? input = Console.ReadLine();
-            Console.Clear();
-
-            if (input == null || !ValidateInput(input)) // Invalid Value inputs
-            {
-                Console.WriteLine("Must enter a valid value");
-
-
-            }
-            else if (input.Length == 1)
-            {
-                backend.Input(input[0]);
-
-            }
-            else
-            {
-                backend.Input(input);
-            }
-
         }
 
         private static bool ContinueGame()
@@ -137,20 +53,6 @@ namespace Hangman
 
         }
 
-        private static bool ValidateInput(string input)
-        {
-            List<char> characters = input.ToLower().ToList();
-
-            foreach (char character in characters)
-            {
-                if (!char.IsLetter(character))
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-
         public static void Main()
         {
             bool gameRunning = true;
@@ -160,10 +62,10 @@ namespace Hangman
                 Console.Clear();
                 while (backend.GameStatus == "Running")
                 {
-                    GameReadout();
-                    TakeInput();
+                    Readouts.GameReadout(backend);
+                    UserInput.TakeInput(backend);
                 }
-                GameOverReadout();
+                Readouts.GameOverReadout(backend);
 
                 gameRunning = ContinueGame();
             }
