@@ -22,5 +22,7 @@ namespace Hangman.ConsoleInterface
             List<char> validCharacters = new (){ '-', ' ' };
             return validCharacters.Contains(character);
         }
+
+        internal static bool ValidateUserNumberInput(int lowerBound, int upperBound, int input) => input >= lowerBound && input <= upperBound;
     }
 }

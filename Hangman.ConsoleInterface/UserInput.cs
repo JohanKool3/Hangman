@@ -38,5 +38,19 @@ namespace Hangman.ConsoleInterface
             }
 
         }
+
+        internal static int TakeNumberInput(int lowerBound, int upperBound, string input)
+        {
+            int integerInput = int.Parse(input);
+            if(InputValidation.ValidateUserNumberInput(lowerBound, upperBound, integerInput))
+            {
+                return int.Parse(input);
+            }
+            else
+            {
+                throw new IndexOutOfRangeException($"Input must be between {lowerBound} and {upperBound}");
+            }
+
+        }
     }
 }

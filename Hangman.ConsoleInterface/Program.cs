@@ -58,6 +58,7 @@ namespace Hangman
             bool gameRunning = true;
             string runningStatus = "";
 
+            // Database connection check
             try
             {
                 runningStatus = backend.GameStatus;
