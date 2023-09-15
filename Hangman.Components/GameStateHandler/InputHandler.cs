@@ -59,20 +59,24 @@ namespace Hangman.Components
         }
         private void HandleString(string? input)
         {
-            // Guard Statement to prevent null value exceptions
             if (input == null)
             {
                 throw new NullReferenceException($"String input is null and therefore cannot be processed, Value {input}");
             }
 
-            if (RepeatedWord(input))
+            if (RepeatedWord(input)) // Already Guessed
             {
                 throw new InvalidOperationException(input + " has already been guessed. Please configure front end validation to prevent these values.");
             }
 
-            if (!InputValidation.ValidateInput(input))
+            if (!InputValidation.ValidateInput(input)) // Doesn't pass validation
             {
                 throw new InvalidOperationException(input + " is not a valid input. Please configure front end validation to prevent these values.");
+            }
+
+            if (input.Length != word.Length) // Word is the incorrect length
+            {
+                throw new InvalidOperationException(input + " is not the correct length. Please configure front end validation to prevent these values.");
             }
 
             // Handles a win by correct guess

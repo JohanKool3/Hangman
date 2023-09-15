@@ -56,11 +56,23 @@ namespace Hangman
         public static void Main()
         {
             bool gameRunning = true;
+            string runningStatus = "";
+
+            try
+            {
+                runningStatus = backend.GameStatus;
+            }
+            catch(System.Exception)
+            {
+                Console.WriteLine("Error connecting to database, please make sure the database is running or user secrets has been configured correctly");
+                gameRunning = false;
+            }
+
 
             while (gameRunning)
             {
                 Console.Clear();
-                while (backend.GameStatus == "Running")
+                while (runningStatus == "Running")
                 {
                     Readouts.GameReadout(backend);
                     UserInput.TakeInput(backend);
