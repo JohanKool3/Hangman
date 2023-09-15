@@ -6,24 +6,24 @@ namespace Hangman.Components.Tests
     {
 
         [Fact]
-        public void GameStateHandler_ConstructorDefaultValues_GuessAmountEqual7()
+        public void GameStateHandler_ConstructorDefaultValues_GuessAmountEqual10()
         {
             GameStateHandler handler = new();
-            Assert.Equal(7, handler.MaxGuesses);
+            Assert.Equal(10, handler.MaxGuesses);
         }
         [Fact]
-        public void GameStateHandler_ConstructorDefaultValue_WordLengthEqual7()
+        public void GameStateHandler_ConstructorDefaultValue_WordLengthEqual10()
         {
             GameStateHandler handler = new();
             char[] chars = handler.CorrectlyGuessedLetters;
-            Assert.Equal(7, chars.Length);
+            Assert.Equal(10, chars.Length);
         }
 
         [Fact]
-        public void GameStateHandler_ConstructorWithWord_GuessAmountEqual7()
+        public void GameStateHandler_ConstructorWithWord_GuessAmountEqual10()
         {
             GameStateHandler handler = new("test");
-            Assert.Equal(7, handler.MaxGuesses);
+            Assert.Equal(10, handler.MaxGuesses);
         }
 
         [Fact]
