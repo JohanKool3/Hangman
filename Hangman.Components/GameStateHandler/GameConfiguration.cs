@@ -9,7 +9,7 @@ namespace Hangman.Components
         {
             gameWon = false;
             complete = false;
-            currentGuesses = 0;
+            incorrectGuessAmount = 0;
             maxGuesses = settings.MaxGuesses;
             ConfigureWordFields(wordIn);
             word = wordIn.ToLower();

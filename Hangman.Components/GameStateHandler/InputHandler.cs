@@ -83,7 +83,7 @@ namespace Hangman.Components
             }
             else
             {
-                currentGuesses++;
+                incorrectGuessAmount++;
                 incorrectWords.Add(input);
             }
 
@@ -120,7 +120,7 @@ namespace Hangman.Components
             }
             else
             {
-                currentGuesses++;
+                incorrectGuessAmount++;
                 incorrectLetters.Add(input);
             }
         }

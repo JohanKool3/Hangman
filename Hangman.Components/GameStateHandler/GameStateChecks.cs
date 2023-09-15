@@ -15,7 +15,7 @@ namespace Hangman.Components
 
         internal void MaxGuessChecks()
         {
-            if (currentGuesses >= maxGuesses)
+            if (incorrectGuessAmount >= maxGuesses)
             {
                 complete = true;
             }

@@ -11,23 +11,26 @@ namespace Hangman.Components
 
     public class Backend
     {
-        private static  InputValidation validator = new();
+        private static InputValidation validator = new();
         private static readonly ConfigSettings settings = new();
-        private static  WordGenerator? wordGenerator;
+        private static WordGenerator? wordGenerator;
         private static DatabaseManager? databaseManager;
         private static GameStateHandler stateHandler = new();
 
 
         public int MaxGuesses => settings.MaxGuesses;
-        public int CurrentGuesses => stateHandler.CurrentGuesses;
-        public char[] CorrectlyGuessedLetters {get{return stateHandler.CorrectlyGuessedLetters;}}
+        public int IncorrectGuessAmount => stateHandler.IncorrectGuessAmount;
+        public char[] CorrectlyGuessedLetters { get { return stateHandler.CorrectlyGuessedLetters; } }
 
-        public List<char> IncorrectLetters { get {return stateHandler.IncorrectLetters; } }
-        public List<string> IncorrectWords { get {return stateHandler.IncorrectWords; } }
-        public string GameStatus { get {return stateHandler.GameStatus; } } 
+        public List<char> IncorrectLetters { get { return stateHandler.IncorrectLetters; } }
+        public List<string> IncorrectWords { get { return stateHandler.IncorrectWords; } }
+        public string GameStatus { get { return stateHandler.GameStatus; } }
 
-        public string Word =>  (wordGenerator != null) ? wordGenerator.Word : "No Word Generated";
+        public string Word => (wordGenerator != null) ? wordGenerator.Word : "No Word Generated";
         public int Difficulty => settings.Difficulty;
+
+        public int Attempts { get { return attempts; } }
+        private int attempts = 0;
 
         /// <summary>
         /// Main backend object to use to interact with front end elements
@@ -51,6 +54,7 @@ namespace Hangman.Components
         public void Input<T>(T input)
         {
             string output = stateHandler.Input(input);
+            attempts ++;
             if (output != "")
             {
                 Console.WriteLine(output);

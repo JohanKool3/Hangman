@@ -96,7 +96,7 @@ namespace Hangman.Components.Tests
         {
             GameStateHandler handler = new("test");
             handler.Input('a');
-            Assert.Equal(1, handler.CurrentGuesses);
+            Assert.Equal(1, handler.IncorrectGuessAmount);
         }
 
         [Fact]
@@ -135,7 +135,7 @@ namespace Hangman.Components.Tests
             GameStateHandler handler = new("test");
             handler.Input("cheese");
 
-            Assert.Equal(1, handler.CurrentGuesses);
+            Assert.Equal(1, handler.IncorrectGuessAmount);
         }
 
         [Fact]
