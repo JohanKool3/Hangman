@@ -12,11 +12,11 @@ namespace Hangman.Components.Tests
             Assert.Equal(10, handler.MaxGuesses);
         }
         [Fact]
-        public void GameStateHandler_ConstructorDefaultValue_WordLengthEqual10()
+        public void GameStateHandler_ConstructorDefaultValue_WordLengthEqual7()
         {
             GameStateHandler handler = new();
             char[] chars = handler.CorrectlyGuessedLetters;
-            Assert.Equal(10, chars.Length);
+            Assert.Equal(7, chars.Length);
         }
 
         [Fact]
@@ -133,7 +133,7 @@ namespace Hangman.Components.Tests
         public void GameStateHandler_StringInput_IncorrectGuessesIncrement()
         {
             GameStateHandler handler = new("test");
-            handler.Input("cheese");
+            handler.Input("nest");
 
             Assert.Equal(1, handler.IncorrectGuessAmount);
         }
@@ -142,16 +142,16 @@ namespace Hangman.Components.Tests
         public void GameStateHandler_StringInput_IncorrectWordsAddedTo()
         {
             GameStateHandler handler = new("test");
-            handler.Input("cheese");
+            handler.Input("nest");
 
-            Assert.Contains("cheese", handler.IncorrectWords);
+            Assert.Contains("nest", handler.IncorrectWords);
         }
 
         [Fact]
         public void GameStateHandler_StringInput_IncorrectWordsLengthEqual1()
         {
             GameStateHandler handler = new("test");
-            handler.Input("cheese");
+            handler.Input("nest");
 
             Assert.Single(handler.IncorrectWords);
         }
@@ -180,7 +180,7 @@ namespace Hangman.Components.Tests
         {
             ConfigSettings configSettings = new(1);
             GameStateHandler handler = new(configSettings, "test");
-            handler.Input("cheese");
+            handler.Input("nest");
             string lost = "Game Lost";
 
             Assert.Equal(lost, handler.GameStatus);
