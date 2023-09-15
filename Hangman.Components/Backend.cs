@@ -12,7 +12,7 @@ namespace Hangman.Components
     public class Backend
     {
         private static InputValidation validator = new();
-        private static readonly ConfigSettings settings = new();
+        public  readonly ConfigSettings settings = new();
         private static WordGenerator? wordGenerator;
         private static DatabaseManager? databaseManager;
         private static GameStateHandler stateHandler = new();
@@ -85,10 +85,7 @@ namespace Hangman.Components
             }
         }
 
-        public static void CustomizeGuessAmount(int guesses)
-        {
-            settings.UpdateGuessAmount(guesses);
-        }
+        public void CustomizeGuessAmount(int guesses) => settings.UpdateGuessAmount(guesses);
 
         private async Task<int[]> FetchDifficultyBounds()
         {

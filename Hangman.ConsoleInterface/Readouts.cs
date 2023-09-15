@@ -6,6 +6,7 @@ namespace Hangman.ConsoleInterface
 {
     internal class Readouts
     {
+        private static readonly string lineBreak = "==================================================================";
         internal static void GameReadout(Backend backend)
         {
             Console.WriteLine($"Current Guesses: {backend.IncorrectGuessAmount}/{backend.MaxGuesses}");
@@ -32,5 +33,29 @@ namespace Hangman.ConsoleInterface
             int correctGuesses = backend.Attempts - backend.IncorrectGuessAmount;
             Console.WriteLine($"Total guesses: {backend.Attempts} of which {correctGuesses} were right.");
         }
+
+        internal static void MainMenuReadout()
+        {
+            Console.WriteLine($"{lineBreak}" +
+                              $"1. Play Game" +
+                              $"2. Change Difficulty" +
+                              $"3. Quit Game" +
+                              $"{lineBreak}");
+        }
+
+        internal static void ChangeDifficultyReadout(Backend backend)
+        {
+            ConfigSettings config = backend.settings;
+
+            Console.WriteLine($"Current Difficulty: {config.Difficulty}");
+
+            Console.WriteLine($"{lineBreak}" +
+                              $"1. Easy" +
+                              $"2. Medium" +
+                              $"3. Hard" +
+                              $"4. Custom" +
+                              $"{lineBreak}");
+        }
+
     }
 }

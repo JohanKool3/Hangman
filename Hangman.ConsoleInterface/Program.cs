@@ -75,7 +75,7 @@ namespace Hangman
                 while (runningStatus == "Running")
                 {
                     Readouts.GameReadout(backend);
-                    UserInput.TakeInput(backend);
+                    UserInput.TakeGuess(backend);
                 }
                 Readouts.GameOverReadout(backend);
 

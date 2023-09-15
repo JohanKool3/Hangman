@@ -1,7 +1,7 @@
 ﻿
 namespace Hangman.Components
 {
-    internal class ConfigSettings
+    public class ConfigSettings
     {
 
         private int difficulty = 1;

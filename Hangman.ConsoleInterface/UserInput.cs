@@ -6,7 +6,7 @@ namespace Hangman.ConsoleInterface
 {
     internal class UserInput
     {
-        internal static void TakeInput(Backend backend)
+        internal static void TakeGuess(Backend backend)
         {
             Console.Write("Enter a word or letter: ");
             string? input = Console.ReadLine();
