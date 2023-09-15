@@ -1,6 +1,7 @@
 ﻿
 
 using Hangman.Components;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Hangman.ConsoleInterface
 {
@@ -39,16 +40,20 @@ namespace Hangman.ConsoleInterface
 
         }
 
-        internal static int TakeNumberInput(int lowerBound, int upperBound, string input)
+        internal static int TakeNumberInput(int lowerBound, int upperBound, string? input)
         {
-            int integerInput = int.Parse(input);
+            if(input == null)
+            {
+                return 0;
+            }
+            int integerInput = int.Parse(input) ;
             if(InputValidation.ValidateUserNumberInput(lowerBound, upperBound, integerInput))
             {
                 return int.Parse(input);
             }
             else
             {
-                throw new IndexOutOfRangeException($"Input must be between {lowerBound} and {upperBound}");
+                return 0;
             }
 
         }

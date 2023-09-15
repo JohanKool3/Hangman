@@ -53,27 +53,25 @@ namespace Hangman
 
         }
 
-        public static void Main()
+        private static void RunGame()
         {
+            Console.Clear();
             bool gameRunning = true;
-            string runningStatus = "";
-
+            _ = "";
             // Database connection check
             try
             {
-                runningStatus = backend.GameStatus;
+                _ = backend.GameStatus;
             }
-            catch(System.Exception)
+            catch (System.Exception)
             {
                 Console.WriteLine("Error connecting to database, please make sure the database is running or user secrets has been configured correctly");
                 gameRunning = false;
             }
 
-
             while (gameRunning)
             {
-                Console.Clear();
-                while (runningStatus == "Running")
+                while (backend.GameStatus == "Running")
                 {
                     Readouts.GameReadout(backend);
                     UserInput.TakeGuess(backend);
@@ -82,7 +80,58 @@ namespace Hangman
 
                 gameRunning = ContinueGame();
             }
+        }
+
+        private static void ChangeDifficulty()
+        {
+            Readouts.ChangeDifficultyReadout(backend);
+            int newDifficulty = UserInput.TakeNumberInput(1, 4, Console.ReadLine());
+            backend.SetNewDifficulty(newDifficulty);
+        }
+
+        private static void DisplayErrorMessage(string message)
+        {
+            Console.WriteLine(message);
+        }
+
+        public static void Main()
+        {
+
             Console.WriteLine("Thank you for playing");
+
+            bool menuRunning = true;
+
+
+            while (menuRunning) {
+
+                // Display menu
+                Readouts.MainMenuReadout();
+
+                // Take input for option
+                string? userInput = Console.ReadLine();
+                int userOption = UserInput.TakeNumberInput(1, 3, userInput);
+
+                // if option is 1, start game
+                switch (userOption)
+                {
+                    case 1:
+                        RunGame();
+                        break;
+                    case 2:
+                        ChangeDifficulty();
+                        break;
+                    case 3:
+                        menuRunning = false;
+                        break;
+                    default:
+                        DisplayErrorMessage($"Invalid Input, must be an option between {1} and {3}");
+                        break;
+                }
+
+                // if option is 2, change difficulty
+
+                // if option is 3, quit game
+            }
         }
     }
 }
