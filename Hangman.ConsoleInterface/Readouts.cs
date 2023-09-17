@@ -4,7 +4,7 @@ using Hangman.Components;
 
 namespace Hangman.ConsoleInterface
 {
-    internal class Readouts
+    internal static class Readouts
     {
         private static readonly string lineBreak = "==================================================================\n";
         internal static void GameReadout(Backend backend)
@@ -53,7 +53,7 @@ namespace Hangman.ConsoleInterface
 
         internal static void ChangeDifficultyReadout(Backend backend)
         {
-            ConfigSettings config = backend.settings;
+            ConfigSettings config = backend.Settings;
 
             Console.Clear();
             Console.WriteLine($"Current Difficulty: {config.Difficulty}");

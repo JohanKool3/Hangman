@@ -13,7 +13,7 @@ namespace Hangman.Components
             ConfigureNewState(settings, wordIn);
         }
 
-        public void SetNewWord(ConfigSettings settings, string wordIn) => ConfigureNewState(settings, wordIn.ToLower());
+        public void SetNewWord(ConfigSettings settings, string wordIn) => ConfigureNewState(settings, wordIn.ToLowerInvariant());
 
         private bool RepeatedLetter(char letter) => correctlyGuessedLetters.Contains(letter) || incorrectLetters.Contains(letter);
 

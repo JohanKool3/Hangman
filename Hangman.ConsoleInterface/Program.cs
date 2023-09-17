@@ -33,7 +33,7 @@ namespace Hangman
             {
                 Console.WriteLine("Would you like to play again? Y/N");
                 string? output = Console.ReadLine();
-                char response =  (output == null) ?' ' :output.ToLower()[0];
+                char response =  (output == null) ?' ' :output.ToLowerInvariant()[0];
 
                 if (response == 'y')
                 {

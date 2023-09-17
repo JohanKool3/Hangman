@@ -1,25 +1,27 @@
 ﻿
 
+using System.Text;
+
 namespace Hangman.ConsoleInterface
 {
-    internal class HelperFunctions
+    internal static class HelperFunctions
     {
         internal static string ConvertCharListToString(List<char> charList)
         {
-            string output = "";
+            StringBuilder output = new();
             foreach (char character in charList)
             {
                 if (character != '\0')
                 {
-                    output += $"{character} ";
+                    output.Append($"{character} ");
                 }
                 else
                 {
-                    output += "_ ";
+                    output.Append("_ ");
                 }
             }
 
-            return output;
+            return output.ToString();
         }
 
         internal static string ConvertStringListToString(List<string> strList)

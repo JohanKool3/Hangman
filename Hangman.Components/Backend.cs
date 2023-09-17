@@ -11,11 +11,12 @@ namespace Hangman.Components
 
     public class Backend
     {
-        private static InputValidation validator = new();
-        public  readonly ConfigSettings settings = new();
-        private static WordGenerator? wordGenerator;
-        private static DatabaseManager? databaseManager;
-        private static GameStateHandler stateHandler = new();
+        private InputValidation validator = new();
+        private readonly ConfigSettings settings = new();
+        public ConfigSettings Settings => settings;
+        private WordGenerator? wordGenerator;
+        private DatabaseManager? databaseManager;
+        private GameStateHandler stateHandler = new();
 
 
         public int MaxGuesses => settings.MaxGuesses;
@@ -49,9 +50,9 @@ namespace Hangman.Components
         }
 
 
-        public void Input<T>(T input)
+        public void Input<T>(T inputValue)
         {
-            string output = stateHandler.Input(input);
+            string output = stateHandler.Input(inputValue);
             if (output != "")
             {
                 Console.WriteLine(output);
@@ -89,7 +90,9 @@ namespace Hangman.Components
             int[] output = new int[2];
 
             if (databaseManager == null)
+            {
                 throw new NullReferenceException("DatabaseManager is null");
+            }
 
             // Reads the lowest difficulty setting
             output[0] = await databaseManager

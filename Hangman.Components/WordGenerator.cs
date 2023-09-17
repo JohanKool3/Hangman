@@ -4,7 +4,7 @@ namespace Hangman.Components
 {
     public class WordGenerator
     {
-        private NpgsqlConnection _connection = new();
+        private readonly NpgsqlConnection _connection = new();
 
         private string word = "";
         public string Word { get { return word; }}

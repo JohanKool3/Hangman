@@ -3,7 +3,7 @@ using Hangman.Components;
 
 namespace Hangman.ConsoleInterface
 {
-    internal class UserInput
+    internal static class UserInput
     {
         internal static bool TakeGuess(Backend backend)
         {
@@ -29,8 +29,8 @@ namespace Hangman.ConsoleInterface
             }
             else
             {
-                int positionOfSpecialCharacterInInput = input.IndexOfAny(new char[] { '-', ' ' });
-                int positionOfSpecialCharacterInWord = backend.Word.IndexOfAny(new char[] { '-', ' ' });
+                int positionOfSpecialCharacterInInput = input.IndexOfAny(new [] { '-', ' ' });
+                int positionOfSpecialCharacterInWord = backend.Word.IndexOfAny(new [] { '-', ' ' });
 
 
                 int backendWordLength = backend.Word.Length;

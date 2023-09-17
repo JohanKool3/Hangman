@@ -13,7 +13,7 @@ namespace Hangman.Components
             incorrectGuessAmount = 0;
             maxGuesses = settings.MaxGuesses;
             ConfigureWordFields(wordIn);
-            word = wordIn.ToLower();
+            word = wordIn.ToLowerInvariant();
         }
 
         private void ConfigureWordFields(string word)

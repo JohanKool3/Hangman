@@ -9,9 +9,9 @@ namespace Hangman.ConsoleInterface.Tests
     public class HelperFunctionsTests
     {
         [Theory]
-        [InlineData(new char[] { 'a', 'b', 'c' }, "a b c ")]
-        [InlineData(new char[] { 'a', 'b', 'c', '\0' }, "a b c _ ")]
-        [InlineData(new char[] { 'a', 'b', 'c', '\0', '\0' }, "a b c _ _ ")]
+        [InlineData(new [] { 'a', 'b', 'c' }, "a b c ")]
+        [InlineData(new [] { 'a', 'b', 'c', '\0' }, "a b c _ ")]
+        [InlineData(new [] { 'a', 'b', 'c', '\0', '\0' }, "a b c _ _ ")]
         public void ConvertCharListToString_ShouldReturnCorrectString(char[] charArray, string expected)
         {
 
@@ -33,9 +33,9 @@ namespace Hangman.ConsoleInterface.Tests
         }
 
         [Theory]
-        [InlineData(new string[] { "a", "b", "c" }, "a, b, c")]
-        [InlineData(new string[] { "a", "b", "c", "d" }, "a, b, c, d")]
-        [InlineData(new string[] { "a", "b", "c", "d", "e" }, "a, b, c, d, e")]
+        [InlineData(new [] { "a", "b", "c" }, "a, b, c")]
+        [InlineData(new [] { "a", "b", "c", "d" }, "a, b, c, d")]
+        [InlineData(new [] { "a", "b", "c", "d", "e" }, "a, b, c, d, e")]
         public void ConvertStringListToString_ShouldReturnCorrectString(string[] stringArray, string expected)
         {
 
@@ -49,7 +49,7 @@ namespace Hangman.ConsoleInterface.Tests
         [Fact]
         public void ConvertStringListToString_ShouldNotMatch()
         {
-            List<string> stringList = new List<string>() { "ab", "bc", "cd" };
+            List<string> stringList = new() { "ab", "bc", "cd" };
 
             string actual = HelperFunctions.ConvertStringListToString(stringList);
 

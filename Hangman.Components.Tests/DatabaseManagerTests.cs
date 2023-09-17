@@ -34,7 +34,7 @@ namespace Hangman.Components.Tests
             DatabaseManager databaseManager = new("localhost", "postgres", "mypassword", "testDatabase");
             string expected = "easy";
             string actual = await databaseManager.GetStringFromDatabase("SELECT tag FROM difficulty LIMIT 1;");
-            actual = actual.ToLower();
+            actual = actual.ToLowerInvariant();
 
             Assert.Equal(expected, actual);
         }

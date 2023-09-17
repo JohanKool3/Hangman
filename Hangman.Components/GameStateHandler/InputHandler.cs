@@ -4,11 +4,11 @@ namespace Hangman.Components
     partial class GameStateHandler
     {
 
-        public string Input<T>(T input)
+        public string Input<T>(T inputValue)
         {
             if (!complete)
             {
-                return HandleInput(input);
+                return HandleInput(inputValue);
             }
             return "";
         }

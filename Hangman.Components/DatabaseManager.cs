@@ -27,7 +27,6 @@ namespace Hangman.Components
                 string connString = $"Host={host};Username={username};Password={password};Database={database}";
                 _connection = new NpgsqlConnection(connString);
                 _connection.Open();
-                return;
             }
             catch(Exception ex)
             {
