@@ -7,6 +7,7 @@ namespace Hangman.Components
 
         private void ConfigureNewState(ConfigSettings settings, string wordIn)
         {
+            Attempts = 0;
             gameWon = false;
             complete = false;
             incorrectGuessAmount = 0;

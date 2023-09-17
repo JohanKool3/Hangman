@@ -15,6 +15,7 @@ namespace Hangman.Components
 
         private string HandleInput<T>(T input)
         {
+            Attempts++;
             string output = "";
             if (typeof(T) == typeof(string))
             {
@@ -82,6 +83,8 @@ namespace Hangman.Components
             // Handles a win by correct guess
             if (IsCorrectGuessString(input))
             {
+                //Display the correct word in WordLetters
+                FillInCorrectlyGuessedLetters();
                 complete = true;
                 gameWon = true;
             }
@@ -126,6 +129,14 @@ namespace Hangman.Components
             {
                 incorrectGuessAmount++;
                 incorrectLetters.Add(input);
+            }
+        }
+
+        private void FillInCorrectlyGuessedLetters()
+        {
+            for (int i = 0; i < word.Length; i++)
+            {
+                correctlyGuessedLetters[i] = word[i];
             }
         }
     }

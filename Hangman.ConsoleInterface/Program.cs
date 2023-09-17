@@ -48,9 +48,10 @@ namespace Hangman
                 }
                 else
                 {
+                    Console.Clear();
                     Console.WriteLine("You must enter either Y or N");
                 }
-                Console.Clear();
+
             }
             return false;
 
@@ -74,6 +75,7 @@ namespace Hangman
 
             while (gameRunning)
             {
+                Console.Clear();
                 while (backend.GameStatus == "Running")
                 {
                     Readouts.GameReadout(backend);
