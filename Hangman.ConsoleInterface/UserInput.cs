@@ -29,8 +29,18 @@ namespace Hangman.ConsoleInterface
             }
             else
             {
+                int positionOfSpecialCharacterInInput = input.IndexOfAny(new char[] { '-', ' ' });
+                int positionOfSpecialCharacterInWord = backend.Word.IndexOfAny(new char[] { '-', ' ' });
+
+
                 int backendWordLength = backend.Word.Length;
                 int inputWordLength = input.Length;
+
+                if (positionOfSpecialCharacterInInput != positionOfSpecialCharacterInWord)
+                {
+                    Console.WriteLine("Special characters must be in the same position as the word");
+                    return false;
+                }
                 if (inputWordLength == backendWordLength)
                 {
                     backend.Input(input);
