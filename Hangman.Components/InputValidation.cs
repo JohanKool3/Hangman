@@ -43,7 +43,7 @@ namespace Hangman.Components
 
             foreach (char character in characters)
             {
-                if(!char.IsLetter(character))
+                if(!char.IsLetter(character) && !IsValidCharacter(character))
                 {
                     return false;
                 }

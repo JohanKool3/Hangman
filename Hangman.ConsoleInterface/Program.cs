@@ -63,15 +63,6 @@ namespace Hangman
             bool gameRunning = true;
             _ = "";
             // Database connection check
-            try
-            {
-                _ = backend.GameStatus;
-            }
-            catch (System.Exception)
-            {
-                Console.WriteLine("Error connecting to database, please make sure the database is running or user secrets has been configured correctly");
-                gameRunning = false;
-            }
 
             while (gameRunning)
             {
@@ -110,6 +101,15 @@ namespace Hangman
 
             while (menuRunning) {
 
+                try
+                {
+                    _ = backend.GameStatus;
+                }
+                catch (System.Exception)
+                {
+                    Console.WriteLine("Error connecting to database, please make sure the database is running or user secrets has been configured correctly");
+                    menuRunning = false;
+                }
                 // Display menu
                 Readouts.MainMenuReadout(backend);
 

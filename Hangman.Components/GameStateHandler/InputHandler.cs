@@ -24,9 +24,21 @@ namespace Hangman.Components
                 {
                     HandleString(cleanInput);
                 }
-                catch
+                catch(ApplicationException)
                 {
                     output = "Word has already been guessed";
+                }
+                catch(InvalidOperationException)
+                {
+                    output = "Invalid input";
+                }
+                catch (NullReferenceException)
+                {
+                    output = "Input is null";
+                }
+                catch (Exception)
+                {
+                    output = "Unknown error";
                 }
             }
             else if (typeof(T) == typeof(char))
@@ -67,7 +79,7 @@ namespace Hangman.Components
 
             if (RepeatedWord(input)) // Already Guessed
             {
-                throw new InvalidOperationException(input + " has already been guessed. Please configure front end validation to prevent these values.");
+                throw new ArgumentException(input + " has already been guessed. Please configure front end validation to prevent these values.");
             }
 
             if (!InputValidation.ValidateInput(input)) // Doesn't pass validation
