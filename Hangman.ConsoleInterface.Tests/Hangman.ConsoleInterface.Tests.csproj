@@ -22,4 +22,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Hangman.ConsoleInterface\Hangman.ConsoleInterface.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,27 +1,30 @@
 ﻿
-
 using Hangman.Components;
-using System.Reflection.Metadata.Ecma335;
 
 namespace Hangman.ConsoleInterface
 {
     internal class UserInput
     {
-        internal static void TakeGuess(Backend backend)
+        internal static bool TakeGuess(Backend backend)
         {
             Console.Write("Enter a word or letter: ");
             string? input = Console.ReadLine();
             Console.Clear();
+            return TakeGuess(backend, input);
 
+        }
+
+        internal static bool TakeGuess(Backend backend,string? input)
+        {
             if (input == null || !InputValidation.ValidateInput(input)) // Invalid Value inputs
             {
                 Console.WriteLine("Must enter a valid value");
-
-
+                return false;
             }
             else if (input.Length == 1)
             {
                 backend.Input(input[0]);
+                return true;
 
             }
             else
@@ -31,13 +34,14 @@ namespace Hangman.ConsoleInterface
                 if (inputWordLength == backendWordLength)
                 {
                     backend.Input(input);
+                    return true;
                 }
                 else
                 {
                     Console.WriteLine($"Word must be {backendWordLength} characters long, current word length: {inputWordLength}");
+                    return false;
                 }
             }
-
         }
 
         internal static int TakeNumberInput(int lowerBound, int upperBound, string? input)
@@ -46,7 +50,15 @@ namespace Hangman.ConsoleInterface
             {
                 return 0;
             }
-            int integerInput = int.Parse(input) ;
+            int integerInput = -1;
+            try
+            {
+                integerInput = int.Parse(input);
+            }
+            catch
+            {
+                return 0;
+            }
             if(InputValidation.ValidateUserNumberInput(lowerBound, upperBound, integerInput))
             {
                 return int.Parse(input);
