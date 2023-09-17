@@ -1,11 +1,11 @@
 ﻿
 namespace Hangman.ConsoleInterface
 {
-    internal class InputValidation
+    internal static class InputValidation
     {
         internal static bool ValidateInput(string input)
         {
-            List<char> characters = input.ToLower().ToList();
+            List<char> characters = input.ToLowerInvariant().ToList();
 
             foreach (char character in characters)
             {

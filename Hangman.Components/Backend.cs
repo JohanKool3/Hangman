@@ -11,12 +11,12 @@ namespace Hangman.Components
 
     public class Backend
     {
-        private InputValidation validator = new();
+        private readonly InputValidation validator = new();
         private readonly ConfigSettings settings = new();
         public ConfigSettings Settings => settings;
         private WordGenerator? wordGenerator;
         private DatabaseManager? databaseManager;
-        private GameStateHandler stateHandler = new();
+        private readonly GameStateHandler stateHandler = new();
 
 
         public int MaxGuesses => settings.MaxGuesses;

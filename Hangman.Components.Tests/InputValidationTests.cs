@@ -41,8 +41,6 @@ namespace Hangman.Components.Tests
         [InlineData("a;")]
         public void InputValidation_ValidateInputString_InvalidInput(string input)
         {
-            var inputValidation = new Components.InputValidation();
-
             var result = Components.InputValidation.ValidateInput(input);
 
             Assert.False(result);

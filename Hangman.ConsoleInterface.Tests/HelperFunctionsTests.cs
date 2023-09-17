@@ -25,7 +25,7 @@ namespace Hangman.ConsoleInterface.Tests
         [Fact]
         public void ConvertCharListToString_ShouldNotMatch()
         {
-            List<char> charList = new List<char>() { 'a', 'b', 'c' };
+            List<char> charList = new() { 'a', 'b', 'c' };
 
             string actual = HelperFunctions.ConvertCharListToString(charList);
 

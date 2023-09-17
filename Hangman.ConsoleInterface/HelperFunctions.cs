@@ -26,19 +26,19 @@ namespace Hangman.ConsoleInterface
 
         internal static string ConvertStringListToString(List<string> strList)
         {
-            string output = "";
+            StringBuilder output = new();
             foreach (string str in strList)
             {
-                output += $"{str}, ";
+                output.Append($"{str}, ");
             }
 
             if (output.Length > 2)
             {
-                return output[..^2];
+                return output.ToString()[..^2];
             }
             else
             {
-                return output;
+                return output.ToString();
             }
         }
     }
