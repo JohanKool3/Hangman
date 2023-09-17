@@ -9,7 +9,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hangman.ConsoleInterface", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hangman.Components.Tests", "Hangman.Components.Tests\Hangman.Components.Tests.csproj", "{6D25A121-A2F4-415D-A297-62AC98122779}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hangman.ConsoleInterface.Tests", "Hangman.ConsoleInterface.Tests\Hangman.ConsoleInterface.Tests.csproj", "{897CBF65-4BEB-400B-887E-AE1553DB2F74}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hangman.ConsoleInterface.Tests", "Hangman.ConsoleInterface.Tests\Hangman.ConsoleInterface.Tests.csproj", "{897CBF65-4BEB-400B-887E-AE1553DB2F74}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8C52FCD7-BD2B-4587-AD3E-F7F62C96679F}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
