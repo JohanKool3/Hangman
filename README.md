@@ -1,4 +1,5 @@
 # Hangman Console Game Project
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/703c87879dba4a33af4c6e621baca3f1)](https://app.codacy.com/gh/JohanKool3/Hangman/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
 ## Project Overview 
 
