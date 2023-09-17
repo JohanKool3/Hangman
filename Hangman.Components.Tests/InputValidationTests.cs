@@ -53,7 +53,6 @@ namespace Hangman.Components.Tests
         [InlineData("ZXY")]
         public void InputValidation_ValidateInputString_ValidInput(string input)
         {
-            var inputValidation = new Components.InputValidation();
 
             var result = Components.InputValidation.ValidateInput(input);
 
