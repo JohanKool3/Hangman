@@ -39,5 +39,5 @@ in order for a successful connection to the database.
   -These tests are based on the PostgreSQL server mentioned earlier.
 
 ### Test Database Setup
- 1. Navigate to "Hangman.ConsoleInterface/Docker Builder." using a command line (running in administrator)
- 2. Execute the "buildAndRun.ps1" command.
+1.  Navigate to "Hangman.ConsoleInterface/Docker Builder." using a command line (running in administrator)
+2.  Execute the "buildAndRun.ps1" command.
