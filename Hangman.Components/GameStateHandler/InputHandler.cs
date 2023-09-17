@@ -15,6 +15,7 @@ namespace Hangman.Components
 
         private string HandleInput<T>(T input)
         {
+            Attempts++;
             string output = "";
             if (typeof(T) == typeof(string))
             {
@@ -23,9 +24,21 @@ namespace Hangman.Components
                 {
                     HandleString(cleanInput);
                 }
-                catch
+                catch(ApplicationException)
                 {
                     output = "Word has already been guessed";
+                }
+                catch(InvalidOperationException)
+                {
+                    output = "Invalid input";
+                }
+                catch (NullReferenceException)
+                {
+                    output = "Input is null";
+                }
+                catch (Exception)
+                {
+                    output = "Unknown error";
                 }
             }
             else if (typeof(T) == typeof(char))
@@ -66,7 +79,7 @@ namespace Hangman.Components
 
             if (RepeatedWord(input)) // Already Guessed
             {
-                throw new InvalidOperationException(input + " has already been guessed. Please configure front end validation to prevent these values.");
+                throw new ArgumentException(input + " has already been guessed. Please configure front end validation to prevent these values.");
             }
 
             if (!InputValidation.ValidateInput(input)) // Doesn't pass validation
@@ -82,6 +95,8 @@ namespace Hangman.Components
             // Handles a win by correct guess
             if (IsCorrectGuessString(input))
             {
+                //Display the correct word in WordLetters
+                FillInCorrectlyGuessedLetters();
                 complete = true;
                 gameWon = true;
             }
@@ -126,6 +141,14 @@ namespace Hangman.Components
             {
                 incorrectGuessAmount++;
                 incorrectLetters.Add(input);
+            }
+        }
+
+        private void FillInCorrectlyGuessedLetters()
+        {
+            for (int i = 0; i < word.Length; i++)
+            {
+                correctlyGuessedLetters[i] = word[i];
             }
         }
     }

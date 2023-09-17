@@ -38,11 +38,11 @@ namespace Hangman.ConsoleInterface
             Console.WriteLine($"Total guesses: {backend.Attempts} of which {correctGuesses} were right.");
         }
 
-        internal static void MainMenuReadout()
+        internal static void MainMenuReadout(Backend backend)
         {
             Console.Clear();
             Console.WriteLine($"{lineBreak}" +
-                              $"1. Play Game\n" +
+                              $"1. Play Game | Difficulty Level: {backend.Difficulty}\n" +
                               $"2. Change Difficulty\n" +
                               $"3. Quit Game\n" +
                               $"{lineBreak}");
@@ -62,6 +62,7 @@ namespace Hangman.ConsoleInterface
                               $"2. Medium\n" +
                               $"3. Hard\n" +
                               $"4. Very Hard\n" +
+                              $"5. Go Back\n" +
                               $"{lineBreak}");
 
 

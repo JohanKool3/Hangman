@@ -3,6 +3,7 @@ namespace Hangman.Components
 {
     partial class GameStateHandler
     {
+        public int Attempts;
         private int incorrectGuessAmount;
         public int IncorrectGuessAmount { get { return incorrectGuessAmount; } }
         private int maxGuesses;

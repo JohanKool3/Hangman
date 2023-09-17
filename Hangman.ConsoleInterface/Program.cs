@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Hangman.Components;
 using Hangman.ConsoleInterface;
+using System.Data;
 
 namespace Hangman
 {
@@ -37,17 +38,20 @@ namespace Hangman
                 if (response == 'y')
                 {
                     backend.SetNewWord();
+                    Console.Clear();
                     return true;
                 }
                 else if(response == 'n')
                 {
+                    Console.Clear();
                     return false;
                 }
                 else
                 {
+                    Console.Clear();
                     Console.WriteLine("You must enter either Y or N");
                 }
-                Console.Clear();
+
             }
             return false;
 
@@ -59,18 +63,10 @@ namespace Hangman
             bool gameRunning = true;
             _ = "";
             // Database connection check
-            try
-            {
-                _ = backend.GameStatus;
-            }
-            catch (System.Exception)
-            {
-                Console.WriteLine("Error connecting to database, please make sure the database is running or user secrets has been configured correctly");
-                gameRunning = false;
-            }
 
             while (gameRunning)
             {
+                Console.Clear();
                 while (backend.GameStatus == "Running")
                 {
                     Readouts.GameReadout(backend);
@@ -85,7 +81,11 @@ namespace Hangman
         private static void ChangeDifficulty()
         {
             Readouts.ChangeDifficultyReadout(backend);
-            int newDifficulty = UserInput.TakeNumberInput(1, 4, Console.ReadLine());
+            int newDifficulty = UserInput.TakeNumberInput(1, 5, Console.ReadLine());
+            if(newDifficulty == 5)
+            {
+                return;
+            }
             backend.SetNewDifficulty(newDifficulty);
         }
 
@@ -96,16 +96,22 @@ namespace Hangman
 
         public static void Main()
         {
-
-            Console.WriteLine("Thank you for playing");
-
             bool menuRunning = true;
 
 
             while (menuRunning) {
 
+                try
+                {
+                    _ = backend.GameStatus;
+                }
+                catch (System.Exception)
+                {
+                    Console.WriteLine("Error connecting to database, please make sure the database is running or user secrets has been configured correctly");
+                    menuRunning = false;
+                }
                 // Display menu
-                Readouts.MainMenuReadout();
+                Readouts.MainMenuReadout(backend);
 
                 // Take input for option
                 string? userInput = Console.ReadLine();
@@ -127,11 +133,8 @@ namespace Hangman
                         DisplayErrorMessage($"Invalid Input, must be an option between {1} and {3}");
                         break;
                 }
-
-                // if option is 2, change difficulty
-
-                // if option is 3, quit game
             }
+            Console.WriteLine("Thank you for playing");
         }
     }
 }

@@ -29,9 +29,7 @@ namespace Hangman.Components
         public string Word => (wordGenerator != null) ? wordGenerator.Word : "No Word Generated";
         public int Difficulty => settings.Difficulty;
 
-        public int Attempts { get { return attempts; } }
-        private int attempts = 0;
-
+        public int Attempts { get { return stateHandler.Attempts; } }
         /// <summary>
         /// Main backend object to use to interact with front end elements
         /// </summary>
@@ -54,7 +52,6 @@ namespace Hangman.Components
         public void Input<T>(T input)
         {
             string output = stateHandler.Input(input);
-            attempts ++;
             if (output != "")
             {
                 Console.WriteLine(output);
